@@ -1,0 +1,46 @@
+{
+  "name": "social-crm-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@tanstack/react-query": "^5.17.19",
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "axios": "^1.6.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-force-graph": "^1.44.2",
+    "react-force-graph-2d": "^1.29.2",
+    "react-router-dom": "^6.21.3",
+    "react-scripts": "5.0.1",
+    "recharts": "^2.10.4",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.3.3"
+  }
+}

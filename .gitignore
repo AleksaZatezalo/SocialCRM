@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+/staticfiles/
+/media/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp/
+.pnp.js
+
+# React
+/frontend/build
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.sql
+*.dump
+
+# Environment
+.env
+.env.local
+
+# Database volumes and data
+postgres_data/
+neo4j_data/
+neo4j_logs/
+
+# Docker volumes (exclude all data)
+/var/lib/postgresql/data
+/var/lib/neo4j/data
+
+# Backup files
+*.bak
+*.backup
+
+# Database dumps
+*.dump
+*.sql

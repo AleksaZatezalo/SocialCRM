@@ -1,0 +1,76 @@
+services:
+  neo4j:
+    image: neo4j:5.13
+    container_name: socialcrm-neo4j
+    ports:
+      - "7474:7474"  # HTTP
+      - "7687:7687"  # Bolt
+    environment:
+      - NEO4J_AUTH=neo4j/socialcrm123
+      - NEO4J_PLUGINS=["graph-data-science"]
+      - NEO4J_dbms_security_procedures_unrestricted=gds.*
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    networks:
+      - socialcrm-network
+
+  postgres:
+    image: postgres:16
+    container_name: socialcrm-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=socialcrm
+      - POSTGRES_USER=crm_user
+      - POSTGRES_PASSWORD=socialcrm123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - socialcrm-network
+
+  backend:
+    build: ./backend
+    container_name: socialcrm-backend
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8001:8000"
+    depends_on:
+      - neo4j
+      - postgres
+    environment:
+      - DATABASE_URL=postgresql://crm_user:socialcrm123@postgres:5432/socialcrm
+      - NEO4J_BOLT_URL=bolt://neo4j:7687
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=socialcrm123
+      - DJANGO_DEBUG=True
+    volumes:
+      - ./backend:/app
+    networks:
+      - socialcrm-network
+
+  frontend:
+    build: ./frontend
+    container_name: socialcrm-frontend
+    ports:
+      - "3001:3000"
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_URL=http://localhost:8001
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - socialcrm-network
+    stdin_open: true
+    tty: true
+
+volumes:
+  neo4j_data:
+  neo4j_logs:
+  postgres_data:
+
+networks:
+  socialcrm-network:
+    driver: bridge
